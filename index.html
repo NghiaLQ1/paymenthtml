@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment</title>
+    <link rel="stylesheet" href="./assets/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+        integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+
+<body>
+    <div class="app">
+        <div id="header">
+            <ul class="nav">
+                <img src="./assets/img/logo.png" alt="" class="logo">
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Send</a></li>
+                <li><a href="#">Wallet</a></li>
+                <li><a href="#">Activity</a></li>
+                <li><a href="#">Help</a></li>
+            </ul>
+
+            <div id="mobile-menu" class="mobile-menu-btn">
+                <i class="menu-icon fa-solid fa-bars"></i>
+            </div>
+        </div>
+
+        <div class="payment">
+            <p class="payment-monney">9,999,999.99 $</p>
+            <p class="payment-desc">Estimated total of all currencies</p>
+            <div class="payment-input">
+                <p class="input-name">Send payment to</p>
+                <input type="text" class="input" id="user" placeholder="Name, @username, email, or mobile" />
+            </div>
+            <div class="payment-input">
+                <p class="input-name">Transfer amount</p>
+                <input type="text" class="input" id="input" placeholder="Transfer amount"
+                    onkeydown="handleKeyDown(event)" />
+            </div>
+            <div class="money-transfer">
+                <div id="transfer"></div>
+                <div class="currency">USD</div>
+            </div>
+            <button class="button" onclick="redirectToSuccessPage()">Transfer Money</button>
+        </div>
+    </div>
+
+    <script>
+        function handleKeyDown(event) {
+            if (event.key === "Enter") {
+                const inputValue = event.target.value;
+                const transferElement = document.getElementById("transfer");
+                const formattedAmount = parseFloat(inputValue).toLocaleString('en-US', { style: 'currency', currency: 'USD' });
+                transferElement.textContent = formattedAmount;
+            }
+        }
+
+        function redirectToSuccessPage() {
+            const userValue = document.getElementById("user").value;
+            const inputValue = document.getElementById("input").value;
+
+            // Kiểm tra xem cả hai trường có giá trị trống không
+            if (userValue.trim() === "" || inputValue.trim() === "") {
+                alert("Please complete all information!!!");
+            } else {
+                // Chuyển hướng đến trang xác nhận thành công và truyền giá trị
+                const formattedAmount = parseFloat(inputValue).toLocaleString('en-US', { style: 'currency', currency: 'USD' });
+                const redirectURL = "success.html?user=" + encodeURIComponent(userValue) + "&amount=" + encodeURIComponent(formattedAmount);
+                window.location.href = redirectURL;
+            }
+        }
+
+        var header = document.getElementById('header')
+        var mobileMenu = document.getElementById('mobile-menu')
+        var headerHeight = header.clientHeight
+
+        //Open/Close Mobile Menu
+        mobileMenu.onclick = function () {
+            var isClose = header.clientHeight === headerHeight;
+            if (isClose) {
+                header.style.height = 'auto';
+            } else {
+                header.style.height = null;   
+            }
+        }
+
+        //Auto close when choose menu
+        var menuItems = document.querySelectorAll('#nav li a[href*="#"]')
+        for (i = 0; i < menuItems.length; i++) {
+            var menuItem = menuItems[i];
+            menuItem.onclick = function () {
+                var isParentMenu = this.nextElementSibling &&menuItem.nextElementSibling.classList.contains('subnav')
+                if(isParentMenu) {
+                    event.preventDefault();
+                } else {
+                    header.style.height = null;
+                }
+            }
+        }
+    </script>
+</body>
+
+</html>

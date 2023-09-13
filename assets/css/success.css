@@ -1,0 +1,47 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font-family: helvetica, arial, helvetica;
+    scroll-behavior: smooth;
+}
+
+.success-page {
+    height: 1000px;
+    text-align: center;
+    margin-top: 100px;
+}
+
+.success-page i {
+    font-size: 300px;
+    color: #73B345;
+    margin-bottom: 30px;
+}
+
+.success-page .status {
+    margin-bottom: 15px;
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.success-page .desc {
+    font-size: 18px;
+}
+
+.button {
+    margin-top: 30px;
+    padding: 10px 40px;
+    border: transparent;
+    border-radius: 16px;
+    background-color: #061669;
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.button:hover {
+    opacity: 0.7;
+}

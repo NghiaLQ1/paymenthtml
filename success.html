@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment</title>
+    <link rel="stylesheet" href="./assets/css/success.css">
+    <link rel="stylesheet" href="./assets/themify-icons/themify-icons.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+        integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+
+<body>
+    <div class="success-page">
+        <i class="fa-regular fa-circle-check"></i>
+        <p class="status">Payment is successful</p>
+        <p class="desc">You paid <span id="amount"></span> to <span id="recipient"></span>.</p>
+        <p class="desc">Payment will be completed within 24 hours.</p>
+        <button class="button" onclick="returnToHomePage()">Make another payment</button>
+    </div>
+
+    <script>
+        const params = new URLSearchParams(window.location.search);
+        const recipient = params.get("user");
+        const amount = params.get("amount");
+
+        if (recipient && amount) {
+            document.getElementById("recipient").textContent = recipient;
+            document.getElementById("amount").textContent = amount;
+        }
+
+        function returnToHomePage() {
+            // Chuyển hướng người dùng về trang chính (trang ban đầu)
+            window.location.href = "index.html";
+        }
+    </script>
+</body>
+
+</html>
